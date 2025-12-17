@@ -1,0 +1,15 @@
+{
+    "loratadine": {
+      "india_import_dependency_percent": 78,
+      "top_import_countries": ["China"],
+      "export_trend": "stable",
+      "insight": "High import dependency indicates sourcing risk and local manufacturing opportunity."
+    },
+    "metformin": {
+      "india_import_dependency_percent": 22,
+      "top_import_countries": ["China", "Germany"],
+      "export_trend": "growing",
+      "insight": "Low import dependency; India is a net exporter."
+    }
+  }
+            

@@ -1,0 +1,19 @@
+{
+    "loratadine": [
+      {
+        "indication": "asthma",
+        "phase": "Phase 2",
+        "status": "completed",
+        "sponsor": "Academic Consortium"
+      }
+    ],
+    "metformin": [
+      {
+        "indication": "alzheimer",
+        "phase": "Phase 2",
+        "status": "ongoing",
+        "sponsor": "NIH"
+      }
+    ]
+  }
+  

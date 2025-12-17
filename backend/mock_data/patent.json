@@ -1,0 +1,17 @@
+{
+    "loratadine": {
+      "active_patents": 1,
+      "key_assignees": ["Schering"],
+      "major_expiry_year": 2026,
+      "fto_risk": "low",
+      "insight": "Core patents nearing expiry; repurposing filings possible with low FTO risk."
+    },
+    "metformin": {
+      "active_patents": 0,
+      "key_assignees": [],
+      "major_expiry_year": null,
+      "fto_risk": "none",
+      "insight": "Off-patent molecule; repurposing strategy fully open."
+    }
+  }
+  

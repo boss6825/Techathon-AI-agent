@@ -1,0 +1,17 @@
+{
+    "asthma": {
+      "market_size_usd_bn": 18.2,
+      "cagr_percent": 6.4,
+      "top_competitors": ["GSK", "AstraZeneca", "Novartis"],
+      "india_patient_burden_mn": 34,
+      "insight": "High patient burden with moderate competition suggests opportunity for differentiated adjunct therapies."
+    },
+    "alzheimer": {
+      "market_size_usd_bn": 9.5,
+      "cagr_percent": 11.2,
+      "top_competitors": ["Biogen", "Eisai"],
+      "india_patient_burden_mn": 4.5,
+      "insight": "High growth but limited approved therapies; strong repurposing potential."
+    }
+  }
+  

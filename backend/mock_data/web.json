@@ -1,0 +1,16 @@
+{
+    "loratadine asthma guidelines": {
+      "summary": "GINA guidelines mention limited benefit of antihistamines in core asthma control but note benefit in allergic subgroups.",
+      "links": [
+        "https://ginasthma.org",
+        "https://nih.gov/asthma-guidelines"
+      ]
+    },
+    "metformin alzheimer news": {
+      "summary": "Observational studies suggest reduced cognitive decline in long-term metformin users.",
+      "links": [
+        "https://nature.com",
+        "https://nejm.org"
+      ]
+    }
+  }
