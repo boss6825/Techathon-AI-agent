@@ -80,42 +80,41 @@ export default function ReportPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen">
       <Navbar />
 
-      <main id="report-content" className="max-w-5xl mx-auto px-6 py-8">
+      <main id="report-content" className="max-w-5xl mx-auto px-6 py-10 space-y-8">
         {/* Report Header */}
-        <div className="bg-gradient-to-br from-purple-900 to-purple-700 text-white rounded-xl p-8 mb-8">
-          <div className="flex items-start justify-between mb-4">
+        <div className="glass-card card-elevated rounded-3xl p-10 mb-4 border border-white/60 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 text-white shadow-2xl">
+          <div className="flex items-start justify-between gap-4 mb-4">
             <div>
-              <p className="text-purple-200 text-sm font-medium mb-2">INTELLIGENCE REPORT #{reportData.id}</p>
-              <h1 className="text-3xl font-bold mb-2">{reportData.title}</h1>
-              <p className="text-purple-100 text-lg">{reportData.molecule}</p>
+              <p className="text-purple-100 text-xs font-semibold tracking-[0.18em] mb-3">INTELLIGENCE REPORT #{reportData.id}</p>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2 leading-tight">{reportData.title}</h1>
+              <p className="text-purple-50 text-lg">{reportData.molecule}</p>
             </div>
             <div className="text-right">
-              <p className="text-purple-200 text-sm">Generated</p>
-              <p className="text-white font-medium">{reportData.generatedDate}</p>
+              <p className="text-purple-100 text-xs tracking-[0.12em] uppercase">Generated</p>
+              <p className="text-white font-semibold">{reportData.generatedDate}</p>
             </div>
           </div>
-          <div className="pt-4 border-t border-purple-600">
-            <p className="text-purple-100 text-sm mb-1">Original Query:</p>
+          <div className="pt-4 border-t border-white/40">
+            <p className="text-purple-100 text-xs mb-1 uppercase tracking-[0.14em]">Original Query</p>
             <p className="text-white">{reportData.query}</p>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 mb-8" data-html2canvas-ignore="true">
+        <div className="flex flex-wrap gap-4 mb-4" data-html2canvas-ignore="true">
           <button
             onClick={handleDownloadPDF}
             disabled={isGenerating}
-            className={`px-6 py-3 bg-purple-900 text-white font-medium rounded-lg transition-colors flex items-center gap-2 ${isGenerating ? 'opacity-60 cursor-not-allowed' : 'hover:bg-purple-800'}`}
+            className={`px-6 py-3 rounded-xl bg-gradient-to-r from-purple-900 via-purple-700 to-fuchsia-600 text-white font-semibold shadow-lg shadow-purple-900/25 hover:shadow-xl hover:-translate-y-0.5 transition-all ${isGenerating ? 'opacity-60 cursor-not-allowed hover:translate-y-0 hover:shadow-lg' : ''}`}
           >
-            <span>⬇</span>
-            {isGenerating ? 'Generating PDF...' : 'Download PDF Report'}
+            {isGenerating ? 'Generating PDF...' : '⬇ Download PDF Report'}
           </button>
           <button
             onClick={() => router.push('/')}
-            className="px-6 py-3 bg-white border-2 border-stone-300 text-stone-700 font-medium rounded-lg hover:bg-stone-50 transition-colors"
+            className="px-6 py-3 rounded-xl border border-white/60 bg-white/80 text-stone-800 font-semibold shadow-sm hover:shadow-md transition-all"
           >
             Run New Query
           </button>
@@ -124,8 +123,8 @@ export default function ReportPage({ params }) {
         {/* Report Sections */}
         <div className="space-y-8">
           {/* Executive Summary */}
-          <section className="bg-white border-2 border-stone-200 rounded-xl p-8">
-            <h2 className="text-2xl font-bold text-stone-900 mb-4 pb-4 border-b-2 border-stone-200">
+          <section className="glass-card card-elevated rounded-2xl p-8 border border-white/60">
+            <h2 className="text-2xl font-bold text-stone-900 mb-4 pb-4 border-b border-white/60">
               Executive Summary
             </h2>
             <div className="prose prose-stone max-w-none">
@@ -139,7 +138,7 @@ export default function ReportPage({ params }) {
                 $2.4B and growing at 8.2% CAGR. Patent landscape analysis reveals clear freedom-to-operate
                 windows opening in Q2 2025, and clinical trial data supports efficacy in target populations.
               </p>
-              <div className="bg-amber-50 border-l-4 border-amber-400 p-4 my-4">
+              <div className="bg-amber-50 border-l-4 border-amber-400 p-4 my-4 rounded-lg">
                 <p className="text-sm font-semibold text-amber-900 mb-2">KEY RECOMMENDATION</p>
                 <p className="text-sm text-amber-800">
                   Pursue 505(b)(2) pathway for novel fixed-dose combination with differentiated
@@ -150,9 +149,9 @@ export default function ReportPage({ params }) {
           </section>
 
           {/* Market Intelligence */}
-          <section className="bg-white border-2 border-blue-200 rounded-xl p-8">
+          <section className="glass-card card-elevated rounded-2xl p-8 border border-white/60">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-2xl">
+              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-2xl">
                 📊
               </div>
               <h2 className="text-2xl font-bold text-stone-900">Market Intelligence</h2>
@@ -160,11 +159,11 @@ export default function ReportPage({ params }) {
             <div className="space-y-4">
               <p className="text-stone-700">{mockAgentResponses.market.summary}</p>
               <div className="grid grid-cols-2 gap-4 my-6">
-                <div className="bg-blue-50 p-4 rounded-lg">
+                <div className="bg-blue-50 p-4 rounded-xl border border-white/60">
                   <p className="text-2xl font-bold text-blue-900">$2.4B</p>
                   <p className="text-sm text-blue-700">Current Market Size</p>
                 </div>
-                <div className="bg-blue-50 p-4 rounded-lg">
+                <div className="bg-blue-50 p-4 rounded-xl border border-white/60">
                   <p className="text-2xl font-bold text-blue-900">8.2%</p>
                   <p className="text-sm text-blue-700">Market CAGR</p>
                 </div>
@@ -181,9 +180,9 @@ export default function ReportPage({ params }) {
           </section>
 
           {/* Patent Landscape */}
-          <section className="bg-white border-2 border-amber-200 rounded-xl p-8">
+          <section className="glass-card card-elevated rounded-2xl p-8 border border-white/60">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center text-2xl">
+              <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-2xl">
                 ⚖️
               </div>
               <h2 className="text-2xl font-bold text-stone-900">Patent Landscape & IP Strategy</h2>
@@ -191,9 +190,9 @@ export default function ReportPage({ params }) {
             <div className="space-y-4">
               <p className="text-stone-700">{mockAgentResponses.patent.summary}</p>
               <div className="overflow-x-auto my-6">
-                <table className="w-full border-collapse">
+                <table className="w-full border-collapse rounded-xl overflow-hidden border border-white/60">
                   <thead>
-                    <tr className="bg-amber-50 border-b-2 border-amber-200">
+                    <tr className="bg-amber-50">
                       {mockAgentResponses.patent.table.headers.map((header, idx) => (
                         <th key={idx} className="text-left p-3 text-sm font-semibold text-stone-900">
                           {header}
@@ -203,9 +202,9 @@ export default function ReportPage({ params }) {
                   </thead>
                   <tbody>
                     {mockAgentResponses.patent.table.rows.map((row, idx) => (
-                      <tr key={idx} className="border-b border-stone-200">
+                      <tr key={idx} className="border-t border-stone-200">
                         {row.map((cell, cellIdx) => (
-                          <td key={cellIdx} className="p-3 text-stone-700">
+                          <td key={cellIdx} className="p-3 text-stone-800">
                             {cell}
                           </td>
                         ))}
@@ -218,9 +217,9 @@ export default function ReportPage({ params }) {
           </section>
 
           {/* Clinical Trials */}
-          <section className="bg-white border-2 border-emerald-200 rounded-xl p-8">
+          <section className="glass-card card-elevated rounded-2xl p-8 border border-white/60">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center text-2xl">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-2xl">
                 🔬
               </div>
               <h2 className="text-2xl font-bold text-stone-900">Clinical Development Pipeline</h2>
@@ -228,9 +227,9 @@ export default function ReportPage({ params }) {
             <div className="space-y-4">
               <p className="text-stone-700">{mockAgentResponses.trials.summary}</p>
               <div className="overflow-x-auto my-6">
-                <table className="w-full border-collapse">
+                <table className="w-full border-collapse rounded-xl overflow-hidden border border-white/60">
                   <thead>
-                    <tr className="bg-emerald-50 border-b-2 border-emerald-200">
+                    <tr className="bg-emerald-50">
                       {mockAgentResponses.trials.table.headers.map((header, idx) => (
                         <th key={idx} className="text-left p-3 text-sm font-semibold text-stone-900">
                           {header}
@@ -240,9 +239,9 @@ export default function ReportPage({ params }) {
                   </thead>
                   <tbody>
                     {mockAgentResponses.trials.table.rows.map((row, idx) => (
-                      <tr key={idx} className="border-b border-stone-200">
+                      <tr key={idx} className="border-t border-stone-200">
                         {row.map((cell, cellIdx) => (
-                          <td key={cellIdx} className="p-3 text-stone-700">
+                          <td key={cellIdx} className="p-3 text-stone-800">
                             {cell}
                           </td>
                         ))}
@@ -255,9 +254,9 @@ export default function ReportPage({ params }) {
           </section>
 
           {/* Trade Analysis */}
-          <section className="bg-white border-2 border-violet-200 rounded-xl p-8">
+          <section className="glass-card card-elevated rounded-2xl p-8 border border-white/60">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-violet-50 rounded-lg flex items-center justify-center text-2xl">
+              <div className="w-12 h-12 bg-violet-50 rounded-xl flex items-center justify-center text-2xl">
                 🌍
               </div>
               <h2 className="text-2xl font-bold text-stone-900">Trade & Manufacturing Analysis</h2>
@@ -276,7 +275,7 @@ export default function ReportPage({ params }) {
           </section>
 
           {/* Strategic Recommendations */}
-          <section className="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-xl p-8">
+          <section className="bg-gradient-to-br from-stone-900 to-stone-800 text-white rounded-2xl p-8 card-elevated">
             <h2 className="text-2xl font-bold mb-6">Strategic Recommendations</h2>
             <div className="space-y-4">
               <div className="bg-white/10 backdrop-blur rounded-lg p-4">
@@ -305,7 +304,7 @@ export default function ReportPage({ params }) {
         </div>
 
         {/* Report Footer */}
-        <div className="mt-12 pt-8 border-t-2 border-stone-200 text-center text-sm text-stone-500">
+        <div className="mt-12 pt-8 border-t border-white/60 text-center text-sm text-stone-500">
           <p>This report was generated by Agentic Pharma Intelligence Platform</p>
           <p className="mt-2">Confidential & Proprietary • For Internal Use Only</p>
         </div>

@@ -88,30 +88,42 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen">
       <Navbar />
 
-      <main className="max-w-[1800px] mx-auto px-6 py-8">
+      <main className="max-w-[1800px] mx-auto px-6 py-10 space-y-10">
         {!hasResults && !isProcessing && (
-          <div className="text-center py-16 mb-8">
-            <h1 className="text-4xl font-bold text-stone-900 mb-4">
-              Pharmaceutical Intelligence at Scale
-            </h1>
-            <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-              AI-powered insights across market, IP, trials, and literature.
-            </p>
+          <div className="glass-card card-elevated rounded-3xl px-10 py-12 text-left border border-white/60">
+            <div className="flex flex-wrap items-start justify-between gap-6">
+              <div className="space-y-4 max-w-3xl">
+                <div className="pill">Enterprise Pharma Intelligence</div>
+                <h1 className="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
+                  Orchestrate market, IP, trials, and trade insights in one console
+                </h1>
+                <p className="text-lg text-stone-600 max-w-2xl">
+                  Ask one complex question — the agentic stack coordinates Market, IP, Trials, Trade, and Internal agents
+                  to deliver decision-grade answers.
+                </p>
+              </div>
+              <div className="text-right space-y-2">
+                <div className="pill justify-end">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Live multi-agent
+                </div>
+                <p className="text-sm text-stone-500">Built for portfolio, BD, and medical affairs teams</p>
+              </div>
+            </div>
           </div>
         )}
 
-        {/* 🔥 FIXED GRID: 2 COLUMNS FROM START */}
-        <div className="grid grid-cols-[1fr,360px] lg:grid-cols-[1fr,380px] gap-8">
-
+        {/* Two-column grid */}
+        <div className="grid grid-cols-[1fr,360px] lg:grid-cols-[1fr,400px] gap-8 items-start">
           {/* LEFT: Chat + Results */}
           <div className="space-y-8">
             {(hasResults || isProcessing) && (
-              <div className="bg-white border-2 border-stone-200 rounded-xl p-6">
-                <h2 className="text-sm font-semibold text-stone-500 mb-2">
-                  CURRENT QUERY
+              <div className="glass-card card-elevated rounded-2xl p-6 border border-white/60">
+                <h2 className="text-xs font-semibold text-stone-500 mb-1 tracking-[0.14em] uppercase">
+                  Current query
                 </h2>
                 <p className="text-lg text-stone-900">{currentQuery}</p>
               </div>
@@ -126,10 +138,10 @@ export default function Home() {
 
             {hasResults && (
               <div className="space-y-6">
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
                   <button
                     onClick={handleGenerateReport}
-                    className="px-6 py-3 bg-purple-900 text-white rounded-lg hover:bg-purple-800"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-900 via-purple-700 to-fuchsia-600 text-white font-semibold shadow-lg shadow-purple-900/25 hover:shadow-xl hover:-translate-y-0.5 transition-all"
                   >
                     📄 Generate Full Report
                   </button>
@@ -139,7 +151,7 @@ export default function Home() {
                       setAgents([]);
                       setCurrentQuery('');
                     }}
-                    className="px-6 py-3 bg-white border-2 border-stone-300 rounded-lg"
+                    className="px-6 py-3 rounded-xl border border-white/60 bg-white/70 text-stone-800 font-semibold shadow-sm hover:shadow-md transition-all"
                   >
                     New Query
                   </button>
@@ -168,15 +180,17 @@ export default function Home() {
             {agents.length > 0 ? (
               <AgentTimeline agents={agents} />
             ) : (
-              <div className="bg-white border-2 border-stone-200 rounded-xl p-6">
-                <h3 className="text-sm font-semibold mb-4">Agent Activity</h3>
-                <p className="text-sm text-stone-400 text-center py-8">
-                  Waiting for query...
+              <div className="glass-card card-elevated rounded-2xl p-6 border border-white/60">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-semibold text-stone-900">Agent Activity</h3>
+                  <span className="pill text-xs">Awaiting query</span>
+                </div>
+                <p className="text-sm text-stone-500 text-center py-8">
+                  Submit a prompt to see the orchestration timeline.
                 </p>
               </div>
             )}
           </div>
-
         </div>
       </main>
     </div>

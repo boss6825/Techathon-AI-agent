@@ -18,7 +18,7 @@ export default function InsightCard({ type, title, data, loading }) {
 
   if (loading) {
     return (
-      <div className="bg-white border-2 border-stone-200 rounded-xl p-6 animate-pulse">
+      <div className="glass-card border border-white/60 rounded-2xl p-6 animate-pulse">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-stone-200 rounded-lg"></div>
           <div className="h-6 bg-stone-200 rounded w-1/3"></div>
@@ -33,13 +33,15 @@ export default function InsightCard({ type, title, data, loading }) {
   }
 
   return (
-    <div className={`bg-white border-2 ${style.border} rounded-xl p-6 hover:shadow-lg transition-shadow`}>
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-4">
-        <div className={`w-10 h-10 ${style.bg} rounded-lg flex items-center justify-center text-xl`}>
+    <div className={`glass-card border ${style.border} rounded-2xl p-6 card-elevated transition-all hover:-translate-y-0.5 hover:shadow-2xl`}>
+      <div className="flex items-start gap-3 mb-4">
+        <div className={`w-12 h-12 ${style.bg} rounded-xl flex items-center justify-center text-xl`}>
           {style.icon}
         </div>
-        <h3 className="text-lg font-semibold text-stone-900">{title}</h3>
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.16em] text-stone-500">Agent Insight</p>
+          <h3 className="text-lg font-semibold text-stone-900">{title}</h3>
+        </div>
       </div>
 
       {/* Content */}
@@ -54,8 +56,8 @@ export default function InsightCard({ type, title, data, loading }) {
           <div className="space-y-2">
             {data.insights.map((insight, idx) => (
               <div key={idx} className="flex items-start gap-2">
-                <span className="text-stone-400 text-xs mt-1">•</span>
-                <span className="text-sm text-stone-600">{insight}</span>
+                <span className="text-purple-500 text-xs mt-1">●</span>
+                <span className="text-sm text-stone-700">{insight}</span>
               </div>
             ))}
           </div>
@@ -64,11 +66,11 @@ export default function InsightCard({ type, title, data, loading }) {
         {/* Data table */}
         {data.table && (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm rounded-xl overflow-hidden border border-stone-200">
               <thead>
-                <tr className="border-b border-stone-200">
+                <tr className="bg-stone-50">
                   {data.table.headers.map((header, idx) => (
-                    <th key={idx} className="text-left py-2 px-3 text-xs font-semibold text-stone-600">
+                    <th key={idx} className="text-left py-2.5 px-3 text-xs font-semibold text-stone-700">
                       {header}
                     </th>
                   ))}
@@ -76,9 +78,9 @@ export default function InsightCard({ type, title, data, loading }) {
               </thead>
               <tbody>
                 {data.table.rows.map((row, idx) => (
-                  <tr key={idx} className="border-b border-stone-100 last:border-0">
+                  <tr key={idx} className="border-t border-stone-100 last:border-0">
                     {row.map((cell, cellIdx) => (
-                      <td key={cellIdx} className="py-2 px-3 text-stone-700">
+                      <td key={cellIdx} className="py-2.5 px-3 text-stone-800">
                         {cell}
                       </td>
                     ))}

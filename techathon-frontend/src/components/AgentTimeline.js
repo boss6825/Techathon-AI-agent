@@ -12,23 +12,19 @@ export default function AgentTimeline({ agents }) {
     error: 'bg-red-500',
   };
 
-  const statusIcons = {
-    idle: '○',
-    running: '◐',
-    completed: '●',
-    error: '✕',
-  };
-
   return (
-    <div className="bg-white border-2 border-stone-200 rounded-xl p-6 md:sticky md:top-24 md:max-h-[calc(100vh-120px)] overflow-y-auto">
-      <h3 className="text-sm font-semibold text-stone-900 mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 bg-purple-900 rounded-full animate-pulse"></span>
-        Agent Activity
-      </h3>
+    <div className="glass-card card-elevated border border-white/60 rounded-2xl p-6 md:sticky md:top-24 md:max-h-[calc(100vh-120px)] overflow-y-auto">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-semibold text-stone-900 flex items-center gap-2">
+          <span className="w-2 h-2 bg-purple-900 rounded-full animate-pulse"></span>
+          Agent Activity
+        </h3>
+        <span className="text-xs text-stone-500">Live</span>
+      </div>
 
       <div className="space-y-3">
         {agents.map((agent, idx) => (
-          <div key={idx} className="flex items-start gap-3 pb-3 border-b border-stone-100 last:border-0">
+          <div key={idx} className="flex items-start gap-3 pb-3 border-b border-white/50 last:border-0">
             {/* Status indicator */}
             <div className="flex-shrink-0 mt-1">
               <div className={`w-3 h-3 rounded-full ${statusColors[agent.status]}`}></div>
@@ -36,14 +32,14 @@ export default function AgentTimeline({ agents }) {
 
             {/* Agent info */}
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-stone-900 truncate">
+              <p className="text-sm font-semibold text-stone-900 truncate">
                 {agent.name}
               </p>
               <p className="text-xs text-stone-500 mt-0.5">
                 {agent.message}
               </p>
               {agent.timestamp && (
-                <p className="text-xs text-stone-400 mt-1">
+                <p className="text-[11px] text-stone-400 mt-1">
                   {agent.timestamp}
                 </p>
               )}
@@ -53,8 +49,8 @@ export default function AgentTimeline({ agents }) {
       </div>
 
       {/* Log footer */}
-      <div className="mt-4 pt-4 border-t border-stone-200">
-        <p className="text-xs text-stone-400 text-center">
+      <div className="mt-4 pt-4 border-t border-white/50">
+        <p className="text-xs text-stone-500 text-center">
           System orchestrated by Master Agent
         </p>
       </div>
