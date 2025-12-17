@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { mockAgentResponses } from '@/lib/mockData';
@@ -12,26 +13,30 @@ import jsPDF from 'jspdf';
  */
 export default function ReportPage({ params }) {
   const router = useRouter();
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleDownloadPDF = async () => {
     const element = document.getElementById('report-content');
     if (!element) return;
 
     try {
-      // Show loading state if needed
+      setIsGenerating(true);
       document.body.style.cursor = 'wait';
 
+      // Simpler capture to avoid oversized canvas errors
       const canvas = await html2canvas(element, {
-        scale: 2,
+        scale: 1.5,
         useCORS: true,
         logging: false,
-        backgroundColor: '#fafaf9', // match bg-stone-50
-        windowWidth: element.scrollWidth,
-        windowHeight: element.scrollHeight
+        backgroundColor: '#fafaf9' // match bg-stone-50
       });
 
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdf = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4'
+      });
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = pdfWidth;
@@ -40,10 +45,12 @@ export default function ReportPage({ params }) {
       let heightLeft = imgHeight;
       let position = 0;
 
+      // First page
       pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
       heightLeft -= pdfHeight;
 
-      while (heightLeft >= 0) {
+      // Additional pages as needed
+      while (heightLeft > 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
@@ -53,8 +60,9 @@ export default function ReportPage({ params }) {
       pdf.save(`Intelligence_Report_${reportData.id}.pdf`);
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Failed to generate PDF. Please try again.');
+      alert(`Failed to generate PDF. Please try again.\n\n${error?.message || ''}`);
     } finally {
+      setIsGenerating(false);
       document.body.style.cursor = 'default';
     }
   };
@@ -99,10 +107,11 @@ export default function ReportPage({ params }) {
         <div className="flex gap-4 mb-8" data-html2canvas-ignore="true">
           <button
             onClick={handleDownloadPDF}
-            className="px-6 py-3 bg-purple-900 text-white font-medium rounded-lg hover:bg-purple-800 transition-colors flex items-center gap-2"
+            disabled={isGenerating}
+            className={`px-6 py-3 bg-purple-900 text-white font-medium rounded-lg transition-colors flex items-center gap-2 ${isGenerating ? 'opacity-60 cursor-not-allowed' : 'hover:bg-purple-800'}`}
           >
             <span>⬇</span>
-            Download PDF Report
+            {isGenerating ? 'Generating PDF...' : 'Download PDF Report'}
           </button>
           <button
             onClick={() => router.push('/')}
