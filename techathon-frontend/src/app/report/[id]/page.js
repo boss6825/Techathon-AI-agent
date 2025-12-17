@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { mockAgentResponses } from '@/lib/mockData';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 /**
  * Report preview page
@@ -11,9 +13,50 @@ import { mockAgentResponses } from '@/lib/mockData';
 export default function ReportPage({ params }) {
   const router = useRouter();
 
-  const handleDownloadPDF = () => {
-    // In real implementation, this would trigger PDF generation
-    alert('PDF report generation would be triggered here. For demo, this simulates the download.');
+  const handleDownloadPDF = async () => {
+    const element = document.getElementById('report-content');
+    if (!element) return;
+
+    try {
+      // Show loading state if needed
+      document.body.style.cursor = 'wait';
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#fafaf9', // match bg-stone-50
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
+
+      pdf.save(`Intelligence_Report_${reportData.id}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    } finally {
+      document.body.style.cursor = 'default';
+    }
   };
 
   const reportData = {
@@ -32,7 +75,7 @@ export default function ReportPage({ params }) {
     <div className="min-h-screen bg-stone-50">
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-6 py-8">
+      <main id="report-content" className="max-w-5xl mx-auto px-6 py-8">
         {/* Report Header */}
         <div className="bg-gradient-to-br from-purple-900 to-purple-700 text-white rounded-xl p-8 mb-8">
           <div className="flex items-start justify-between mb-4">
@@ -53,7 +96,7 @@ export default function ReportPage({ params }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 mb-8">
+        <div className="flex gap-4 mb-8" data-html2canvas-ignore="true">
           <button
             onClick={handleDownloadPDF}
             className="px-6 py-3 bg-purple-900 text-white font-medium rounded-lg hover:bg-purple-800 transition-colors flex items-center gap-2"

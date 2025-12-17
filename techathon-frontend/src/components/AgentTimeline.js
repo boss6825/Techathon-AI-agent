@@ -20,7 +20,7 @@ export default function AgentTimeline({ agents }) {
   };
 
   return (
-    <div className="bg-white border-2 border-stone-200 rounded-xl p-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-120px)] overflow-y-auto">
+    <div className="bg-white border-2 border-stone-200 rounded-xl p-6 md:sticky md:top-24 md:max-h-[calc(100vh-120px)] overflow-y-auto">
       <h3 className="text-sm font-semibold text-stone-900 mb-4 flex items-center gap-2">
         <span className="w-2 h-2 bg-purple-900 rounded-full animate-pulse"></span>
         Agent Activity
